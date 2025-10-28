@@ -1,7 +1,8 @@
 import { ProSidebar, Menu, MenuItem, SubMenu, SidebarHeader, SidebarFooter, SidebarContent } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
-import { FaTachometerAlt, FaGem, FaList, FaGithub, FaRegLaughWink, FaHeart } from 'react-icons/fa';
+import { FaTachometerAlt, FaGem, FaList, FaGithub, FaRegLaughWink, FaHeart, FaReact } from 'react-icons/fa';
 import sidebarBg from '../../assets/bg2.jpg';
+import { Outlet, Link } from "react-router";
 
 const Sidebar = ({ image, collapsed, toggled, handleToggleSidebar }) => {
     return (
@@ -26,8 +27,10 @@ const Sidebar = ({ image, collapsed, toggled, handleToggleSidebar }) => {
                             whiteSpace: 'nowrap',
                         }}
                     >
-                        sidebarTitle
+                        <FaReact size='4em' color='#42b7ccff' />
+                        <span>SideBar</span>
                     </div>
+
                 </SidebarHeader>
 
                 <SidebarContent>
@@ -36,19 +39,22 @@ const Sidebar = ({ image, collapsed, toggled, handleToggleSidebar }) => {
                             icon={<FaTachometerAlt />}
                             suffix={<span className="badge red">new</span>}
                         >
-                            dashboard
+                            Dashboard
+                            <Link to="/admins"></Link>
                         </MenuItem>
-                        <MenuItem icon={<FaGem />}> components</MenuItem>
+                        {/* <MenuItem icon={<FaGem />}> components</MenuItem> */}
                     </Menu>
                     <Menu iconShape="circle">
                         <SubMenu
                             suffix={<span className="badge yellow">3</span>}
                             // title={intl.formatMessage({ id: 'withSuffix' })}
-                            icon={<FaRegLaughWink />}
+                            icon={<FaGem />}
+                            title="Features"
                         >
-                            <MenuItem> 1</MenuItem>
-                            <MenuItem> 2</MenuItem>
-                            <MenuItem> 3</MenuItem>
+                            <MenuItem> Quan ly User
+                                <Link to="/admins/manage-user"></Link></MenuItem>
+                            <MenuItem> Quan ly bai Quiz</MenuItem>
+                            <MenuItem> Quan ly cau hoi</MenuItem>
                         </SubMenu>
 
                     </Menu>
@@ -62,7 +68,7 @@ const Sidebar = ({ image, collapsed, toggled, handleToggleSidebar }) => {
                         }}
                     >
                         <a
-                            href="https://github.com/azouaoui-med/react-pro-sidebar"
+                            href="https://github.com/buiduchai/ProjectDemo"
                             target="_blank"
                             className="sidebar-btn"
                             rel="noopener noreferrer"
@@ -74,7 +80,7 @@ const Sidebar = ({ image, collapsed, toggled, handleToggleSidebar }) => {
                         </a>
                     </div>
                 </SidebarFooter>
-            </ProSidebar>
+            </ProSidebar >
         </>
     )
 }
