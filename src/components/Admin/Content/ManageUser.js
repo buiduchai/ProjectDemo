@@ -4,6 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import ModalCreateUser from './ModalCreateUser';
 import './ManageUser.scss';
 import { FcPlus } from "react-icons/fc";
+import TableUser from './TableUser';
 
 
 const ManageUser = (props) => {
@@ -19,7 +20,7 @@ const ManageUser = (props) => {
                     <button className='btn btn-primary' onClick={() => { setModalshow(true) }}><FcPlus></FcPlus>Add new user</button>
                 </div>
                 <div>
-                    table users
+                    <TableUser></TableUser>
                 </div>
                 <ModalCreateUser show={modalshow} setShow={setModalshow}></ModalCreateUser>
             </div>

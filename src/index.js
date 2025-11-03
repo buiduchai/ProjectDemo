@@ -15,21 +15,21 @@ import Dashboard from './components/Admin/Content/Dashboard';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
-    <React.StrictMode>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<App />} >
-            <Route index element={<Homepage />} />
-            <Route path="/users" element={<User />} />
+    {/* <React.StrictMode> */}
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />} >
+          <Route index element={<Homepage />} />
+          <Route path="/users" element={<User />} />
 
-          </Route>
-          <Route path="/admins" element={<Admin />} >
-            <Route index element={<Dashboard />} />
-            <Route path="manage-user" element={<ManageUser />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </React.StrictMode>
+        </Route>
+        <Route path="/admins" element={<Admin />} >
+          <Route index element={<Dashboard />} />
+          <Route path="manage-user" element={<ManageUser />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+    {/* </React.StrictMode> */}
   </Provider >
 );
 
