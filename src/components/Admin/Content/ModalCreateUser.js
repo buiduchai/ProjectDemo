@@ -70,6 +70,7 @@ const ModalCreateUser = (props) => {
         if (res.data && res.data.EC === 0) {
             toast.success(res.data.EM);
             handleClose();
+            await props.fetData();
         }
         if (res.data && res.data.EC !== 0) {
             toast.error(res.data.EM);
@@ -91,7 +92,7 @@ const ModalCreateUser = (props) => {
                 className='modal-create-user'
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>Add new user</Modal.Title>
+                    <Modal.Title>Add a user</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <form className="row g-3">

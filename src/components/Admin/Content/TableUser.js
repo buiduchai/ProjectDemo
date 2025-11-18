@@ -1,34 +1,19 @@
-import { useEffect, useState } from "react";
-import { getAllUser } from '../../../services/apiServices'
 
 const TableUser = (props) => {
 
-    const [listUser, setListUsers] = useState('');
-
-    useEffect(() => {
-        fetData();
-    }, []);
-
-    const fetData = async () => {
-        let res = await getAllUser()
-
-        if (res.data && res.data.EC === 0) {
-            console.log(res.data.DT);
-            setListUsers(res.data.DT);
-            // console.log(listUser);
-        }
-    }
+    // const [listUser, setListUsers] = useState('');
+    const { listUser } = props;
 
     return (
         <>
             <table className="table table-hover table-bordered">
                 <thead>
                     <tr>
-                        <th scope="col">No</th>
+                        <th scope="col">ID</th>
                         <th scope="col">Username</th>
                         <th scope="col">Email</th>
                         <th scope="col">Role</th>
-                        <th >Action</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,21 +21,26 @@ const TableUser = (props) => {
                         listUser.map((item, index) => {
                             return (
                                 <tr key={`table-user-${index}`}>
-                                    <td>{index + 1}</td>
+                                    <td>{item.id}</td>
                                     <td>{item.username}</td>
                                     <td>{item.email}</td>
                                     <td>{item.role}</td>
-                                    <td>
-                                        <button className="btn btn-secondary">View</button>
-                                        <button className="btn btn-warning mx3">Update</button>
-                                        <button className="btn btn-danger">Delete</button>
+                                    <td className="table-user-td">
+                                        <button className="btn btn-secondary"> View </button>
+                                        <button className="btn btn-warning mx3"> Update </button>
+                                        <button className="btn btn-danger"> Delete </button>
                                     </td>
                                 </tr>
                             )
                         })
                     }
+                    {listUser && listUser.length === 0 &&
+                        <tr>
+                            <td colSpan={'4'}>Not found Data</td>
+                        </tr>
+                    }
                 </tbody>
-            </table>
+            </table >
         </>
     )
 }
