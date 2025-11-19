@@ -29,6 +29,10 @@ const ManageUser = (props) => {
         }
     }
 
+    const handleSetDataupdate = () => {
+        setDataupdate();
+    }
+
     const handleClickUpdate = (userItem) => {
         setModalupdate(true);
         setDataupdate(userItem)
@@ -46,7 +50,7 @@ const ManageUser = (props) => {
                     <TableUser listUser={listUser} handleClickUpdate={handleClickUpdate}></TableUser>
                 </div>
                 <ModalCreateUser show={modalshow} setShow={setModalshow} fetData={fetData}></ModalCreateUser>
-                <ModalUpdateUser show={modalupdate} setShow={setModalupdate} dataUpdate={dataUpdate}></ModalUpdateUser>
+                <ModalUpdateUser show={modalupdate} setShow={setModalupdate} dataUpdate={dataUpdate} fetData={fetData} handleSetDataupdate={handleSetDataupdate}></ModalUpdateUser>
             </div>
 
         </div>

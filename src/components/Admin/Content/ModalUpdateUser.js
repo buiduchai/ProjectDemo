@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import { FcPlus } from "react-icons/fc";
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { postCreateUser } from '../../../services/apiServices'
+import { postCreateUser, putUpdateUser } from '../../../services/apiServices'
 import _ from 'lodash';
 
 const ModalUpdateUser = (props) => {
@@ -13,6 +13,7 @@ const ModalUpdateUser = (props) => {
     // const [show, setShow] = useState(false);
 
     const handleClose = () => {
+        setid('');
         setEmail('');
         setPassword('');
         setUsername('');
@@ -20,9 +21,11 @@ const ModalUpdateUser = (props) => {
         setImage('');
         setPreviewimage("");
         setShow(false);
+        props.handleSetDataupdate();
     }
     const handleShow = () => setShow(true);
 
+    const [id, setid] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [username, setUsername] = useState("");
@@ -35,6 +38,7 @@ const ModalUpdateUser = (props) => {
             setEmail(dataUpdate.email)
             setUsername(dataUpdate.username)
             setRole(dataUpdate.role)
+            setid(dataUpdate.id)
             if (dataUpdate.image) {
                 setPreviewimage(`data:image/jpeg;base64,${dataUpdate.image}`)
             }
@@ -59,25 +63,22 @@ const ModalUpdateUser = (props) => {
             );
     };
 
-    const handleSubmitCreateUser = async () => {
+    const handleSubmitUpdateUser = async () => {
         //valid data
-        const isvalidEmail = validateEmail(email)
-        if (!isvalidEmail) {
-            toast.error('invalid email')
-            return;
-        }
-        if (!password) {
-            toast.error('password not null')
-            return;
-        }
+
         if (!username) {
             toast.error('username not null')
             return;
         }
 
+        if (!role) {
+            toast.error('role not null')
+            return;
+        }
+
         //submit data
 
-        let res = await postCreateUser(email, password, username, role, image)
+        let res = await putUpdateUser(id, username, role, image)
         if (res.data && res.data.EC === 0) {
             toast.success(res.data.EM);
             handleClose();
@@ -127,8 +128,8 @@ const ModalUpdateUser = (props) => {
                             <select className="form-select" value={role}
                                 onChange={(event) => setRole(event.target.value)} >
                                 <option ></option>
-                                <option >User</option>
-                                <option>Admin</option>
+                                <option value='USER'>User</option>
+                                <option value='ADMIN'>Admin</option>
                             </select>
                         </div>
                         <div className='col-md-12'>
@@ -152,7 +153,7 @@ const ModalUpdateUser = (props) => {
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={() => handleSubmitCreateUser()}>
+                    <Button variant="primary" onClick={() => handleSubmitUpdateUser()}>
                         Save
                     </Button>
                 </Modal.Footer>
