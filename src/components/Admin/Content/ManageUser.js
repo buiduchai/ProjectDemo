@@ -8,13 +8,14 @@ import TableUser from './TableUser';
 import { useEffect, useState } from "react";
 import { getAllUser } from '../../../services/apiServices'
 import ModalUpdateUser from './ModalUpdateUser';
-
+import ModalViewUser from './ModalViewUser';
 
 const ManageUser = (props) => {
     const [modalshow, setModalshow] = useState(false);
     const [modalupdate, setModalupdate] = useState(false);
     const [listUser, setListUsers] = useState('');
     const [dataUpdate, setDataupdate] = useState({});
+    const [modalview, setModalview] = useState(false);
 
     useEffect(() => {
         fetData();
@@ -37,6 +38,11 @@ const ManageUser = (props) => {
         setModalupdate(true);
         setDataupdate(userItem)
     }
+
+    const handleClickView = (userItem) => {
+        setModalview(true);
+        setDataupdate(userItem)
+    }
     return (
         <div className="manager-user-container">
             <div className="tittle">
@@ -47,10 +53,11 @@ const ManageUser = (props) => {
                     <button className='btn btn-primary' onClick={() => { setModalshow(true) }}><FcPlus></FcPlus>Add new user</button>
                 </div>
                 <div>
-                    <TableUser listUser={listUser} handleClickUpdate={handleClickUpdate}></TableUser>
+                    <TableUser listUser={listUser} handleClickUpdate={handleClickUpdate} handleClickView={handleClickView}></TableUser>
                 </div>
                 <ModalCreateUser show={modalshow} setShow={setModalshow} fetData={fetData}></ModalCreateUser>
                 <ModalUpdateUser show={modalupdate} setShow={setModalupdate} dataUpdate={dataUpdate} fetData={fetData} handleSetDataupdate={handleSetDataupdate}></ModalUpdateUser>
+                <ModalViewUser show={modalview} setShow={setModalview} dataUpdate={dataUpdate} fetData={fetData} handleSetDataupdate={handleSetDataupdate}></ModalViewUser>
             </div>
 
         </div>
